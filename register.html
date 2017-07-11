@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SGA | Registro</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <link href="css/prettyPhoto.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->       
+    <link rel="shortcut icon" href="images/ico/logo.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="images/ico/favicon1.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/favicon1.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/favicon1.png">
+    <link rel="apple-touch-icon-precomposed" href="images/ico/favicon1.png">
+	<script>
+	function validar(){
+		 pas =  /^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,16}$/;
+		var clave = document.form.con.value;
+		var clave1 = document.form.con2.value;
+		var usuario = document.form.usu.value;
+		var iden = document.form.ide.value;
+		var nomb = document.form.nom.value;
+		var apel = document.form.ape.value;
+			
+		if (usuario == "" || clave == "" || clave1 == "" || iden == "" || nom  == "" || ape  == "")
+			{
+				capa.innerHTML = "¡Por favor llene todos los campos!";
+				document.form.usu.focus();
+				return false;
+			}
+		else
+			{
+				if (usuario == clave)
+					{
+						capa.innerHTML = '¡La contraseña no puede ser igual al usuario!';
+						document.form.con.focus();
+					return false;
+					}
+				if (clave1 != clave)
+					{
+						capa.innerHTML = '¡Las contraseña deben coincidir!';
+						document.form.con2.focus();
+					return false;
+					}	
+				if (/\s/.test(clave1)) 
+					{
+						capa.innerHTML = '¡La contraseña no puede tener espacios en blancos!'; 
+						return false;
+					}	
+				if (clave.length<8 || clave.length>15)
+					{
+						capa.innerHTML = '¡La contraseña debe ser mínimo de 8 y máximo 15 carácteres!'; 
+						return false;
+					}
+				if (!pas.test(clave))
+					{
+						capa.innerHTML = '¡La contraseña debe contener al menos un dígito, al menos una minúscula y al menos una mayúscula.';
+						return false;
+					 }	
+			}
+			return true;
+						
+		}
+	</script>
+</head><!--/head-->
+<body>
+    <header class="navbar navbar-inverse navbar-fixed-top wet-asphalt" role="banner">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.php" target="_parent"><img src="images/logo.png" alt="logo"></a>
+            </div>
+			<?php include "inc/menuNav.html"; ?>
+        </div>
+    </header>
+
+    <section id="title" class="gray-pad">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>Registrar Nuevo Usuario</h1>
+                    <p>Registrate para ver todos nuestros espacios.</p>
+                </div>
+                <div class="col-sm-6">
+                    <ul class="breadcrumb pull-right">
+                        <li><a href="index.html">Inicio</a></li>
+                        <li class="active">Registro</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="registration" class="container">
+			<div class="center">
+                <h2>Formulario de Registro</h2>
+            </div>
+        <form class="center" role="form" action="Conf.html" name="form" method="post" onSubmit="return validar()" >
+            <fieldset class="registration-form" style="width:50%;border:1px solid #bdbdbd;">
+                <div class="form-group">
+					<span style="float:left">Nombre de Usuario</span><div class="clearfix"></div>                    
+					<input type="text" id="username" name="usu" class="form-control" />
+                </div>
+                <div class="form-group">
+					<span style="float:left">Número de Identificación</span><div class="clearfix"></div>                    
+                    <input type="text" id="ide" name="ide" class="form-control"  />
+                </div>
+                <div class="form-group">
+					<span style="float:left">Nombre/s</span><div class="clearfix"></div>                    
+                    <input type="text" id="nom" name="nom" class="form-control"  />
+                </div>
+                <div class="form-group">
+					<span style="float:left">Apellidos</span><div class="clearfix"></div>                    
+                    <input type="text" id="ape" name="ape" class="form-control"  />
+                </div>
+                <div class="form-group">
+					<span style="float:left">Contraseña</span><div class="clearfix"></div>
+                    <input type="password" id="con" name="con" class="form-control"  />
+                </div>
+                <div class="form-group">
+					<span style="float:left">Confirmar Contraseña</span><div class="clearfix"></div>
+                    <input type="password" id="con2" name="con2" class="form-control"  />
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-md btn-block" id="boton" >Registrar</button>
+                </div>
+				<div id="capa"></div>
+		
+            </fieldset>
+        </form>
+    </section>
+
+<?php include "inc/footer.html"; ?>
+
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
